@@ -15,7 +15,7 @@ Aplicación que puede detectar si un humano es mutante basándose en su secuenci
   "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"]
 }
 ```
-Las letras de los Strings solo pueden ser: (A,T,C,G), las cuales representa cada base nitrogenada del ADN.  
+Las letras de los Strings solo pueden ser: (A,T,C,G)<sup>(3)</sup>, las cuales representa cada base nitrogenada del ADN.  
 
 A su vez la aplicación expone un servicio mediante el verbo GET "_/stats_" donde se pueden obtener la estadísticas de las verificaciones de ADN, ejemplo:
 
@@ -49,7 +49,7 @@ A su vez la cantidad de letras **debe** ser mayor o igual a la cantidad de letra
 * [Spring Boot](https://spring.io/projects/spring-boot) - Framework para la exposición de Apis
 * [Google Cloud SDK](https://cloud.google.com/sdk/) - Para la exposición de la Api en internet
 
-## Instalacion
+## Instalación
 Ubicarse en algun lugar del equipo y ejecutar:
 
 ```
@@ -128,7 +128,8 @@ Los codigos de respuestas manejados de este servicio son:
 * **HTTP 200-OK** : _En caso de que no haya ningun problema con las estadisticas_.  
 
 ## Referencias
-<sup>(1)</sup> Se podra modificar la cantidad de letras que conforman la base nitrogenada modificando el valor de la key <code>nitrogenous.base.mutant.size</code> en el archivo <code>src/main/resources/application.properties</code>  
-<sup>(2)</sup> Se podra modificar el puerto de escucha de los servicios modificando el valor de la key <code>server.port</code> en el archivo <code>src/main/resources/application.properties</code>
+* <sup>(1)</sup> Se podra modificar la cantidad de letras que conforman la base nitrogenada modificando el valor de la key <code>nitrogenous.base.mutant.size</code> en el archivo <code>src/main/resources/application.properties</code>  
+* <sup>(2)</sup> Se podra modificar el puerto de escucha de los servicios modificando el valor de la key <code>server.port</code> en el archivo <code>src/main/resources/application.properties</code>  
+* <sup>(3)</sup> Se podra modificar las letras de la base nitrogenada de un ADN Mutante modificando el valor de la key <code>nitrogenous.base.pattern=</code> en el archivo <code>src/main/resources/application.properties</code>
 ## Autor
 * **Mauricio Borelli** - *Trabajo Inicial y Documentación*

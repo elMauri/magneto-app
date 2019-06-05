@@ -115,11 +115,10 @@ public class AdnService implements IAdnService{
 		int i = 0;
 		Pattern p = Pattern.compile(ADNPATTERN);
 		Matcher m;
-		int nitrogenousBaseSize = dnaChains.get(0).length();
-		if (dnaChains.size() != nitrogenousBaseSize)
-			throw new AdnChainsSizeNoMatchException("La cantidad de cadenas ["+dnaChains.size()+"] NO es igual a la cantidad de Letras de una cadena :"+nitrogenousBaseSize);
 		String[] adnMatrix = new String[dnaChains.size()];
 		for (String chain : dnaChains) {
+			if (chain.length() != dnaChains.size())
+				throw new AdnChainsSizeNoMatchException("La cantidad de cadenas ["+dnaChains.size()+"] NO es igual a la cantidad de Letras de una cadena :"+chain.length());
 			m = p.matcher(chain);
 			if (!m.find()){
 				throw new AdnChainNoMatchException("La cadena ["+chain+"] NO cumple con las letras de la base Nitrogenada :"+ADNPATTERN.substring(ADNPATTERN.indexOf("["), ADNPATTERN.indexOf("]")));
