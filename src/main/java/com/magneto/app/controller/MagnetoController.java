@@ -48,7 +48,7 @@ public class MagnetoController {
 		String[] adnMatrix = adnService.load(dnaChains);
 		Adn adn = new Adn(adnMatrix);
 		adnService.saveAdn(adn);
-		adnService.printAdnMatrix(adnMatrix);
+		//adnService.printAdnMatrix(adnMatrix);
 		return (adnService.isMutant(adnMatrix)) ? new ResponseEntity<>(HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);		
 	}
 	
@@ -69,9 +69,10 @@ public class MagnetoController {
 				++countH;
 		}
 		try {
-			ratio = (float) countM/countH;
+			//WA para evitar que la jvm de gcloud retorn "Infinity"
+			ratio= (countM == 0)? 0: (float) countM/(countM+countH);
 			StatsService statsS = new StatsService(countM, countH, ratio);
-			return new ResponseEntity<>(statsS, HttpStatus.OK);
+			return new ResponseEntity<>(statsS, HttpStatus.OK);				
 		}catch (ArithmeticException e){
 			ratio = (float) 0;
 			StatsService statsS = new StatsService(countM, countH, ratio);
