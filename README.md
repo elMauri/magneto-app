@@ -101,9 +101,26 @@ Los codigos de respuestas manejados de este servicio son:
 
 * **HTTP 200-OK** : _En caso de que un ADN sea Mutante_.  
 * **403-Forbidden** : _En caso de que un ADN NO se Mutante_.  
-* **406 Not Acceptable**: _En caso de que la cantidad de letras de cada cadena no se corresponda con la cantidad de cadenas (esto para hacer que la matriz sea de NxN)._  
-* **406 Not Acceptable**: _En caso de que las letras de la cadena no cumpla con el patrón (A,T,C,G)._
-
+* **406 Not Acceptable**: _En caso de que la cantidad de letras de cada cadena no se corresponda con la cantidad de cadenas (esto para hacer que la matriz sea de NxN). Y retornará un Json con la siguiente estructura:_
+```
+{
+    "timestamp": "2019-06-05T15:49:17.102+0000",
+    "status": 406,
+    "error": "Not Acceptable",
+    "message": "La cantidad de cadenas [X] NO es igual a la cantidad de Letras de una cadena :Y",
+    "path": "/magnetoapi/mutant"
+}
+```
+* **406 Not Acceptable**: _En caso de que las letras de la cadena no cumpla con el patrón (A,T,C,G). Y retornará un Json con la siguiente estructura:_
+```
+{
+    "timestamp": "2019-06-05T15:50:46.413+0000",
+    "status": 406,
+    "error": "Not Acceptable",
+    "message": "La cadena [XXXX] NO cumple con las letras de la base Nitrogenada :[ATCG",
+    "path": "/magnetoapi/mutant"
+}
+```
 #### **Servicio:**
 ```
 “/stats/”
