@@ -27,8 +27,8 @@ A su vez la aplicación expone un servicio mediante el verbo GET "_/stats_" dond
 }
 ```
 
-## Pre-requisitos
-La cantidad de letras de cada cadena nitrogenada debe ser **igual** a la cantidad de cadenas, es decir, si la cadena cuenta por ejemplo con 6 letras respetando el patrón (A,T,C,G) la cantidad de cadenas deben ser 6.  
+## Pre-condiciones
+* La cantidad de letras de cada cadena nitrogenada debe ser **igual** a la cantidad de cadenas, es decir, si la cadena cuenta por ejemplo con 6 letras respetando el patrón (A,T,C,G) la cantidad de cadenas deben ser 6.  
 Ejemplo 1: 
 ```
 "ATGCGA" → "ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"
@@ -37,7 +37,10 @@ Ejemplo 2:
 ```
 "ATG" → "ATG","CAG","TTA"
 ```
-A su vez la cantidad de letras **debe** ser mayor o igual a la cantidad de letras _**4**_ correspondientes a la cantidad mínima de letras igual que determinan si un ADN es mutante.
+A su vez la cantidad de letras **debe** ser mayor o igual a la cantidad de letras _**4**_<sup>(1)</sup> correspondientes a la cantidad mínima de letras iguales que determinan si un ADN es mutante.
+</br>
+* Si se ejecuta dos veces la misma cadena de ADN la aplicación retornará <code>**HTTP 200-OK**</code> sin embargo la misma no será tenida en cuenta para las estadísticas.
+
 ## Construido con
 
 * [Java](https://www.java.com/es/download/) - El lenguaje utilizado
@@ -123,8 +126,6 @@ Los codigos de respuestas manejados de este servicio son:
 
 * **HTTP 200-OK** : _En caso de que no haya ningun problema con las estadisticas_.  
 
-&nbsp; 
-</br>
 ## Referencias
 <sup>(1)</sup> Se podra modificar la cantidad de letras que conforman la base nitrogenada modificando el valor de la key <code>nitrogenous.base.mutant.size</code> en el archivo <code>src/main/resources/application.properties</code>  
 <sup>(2)</sup> Se podra modificar el puerto de escucha de los servicios modificando el valor de la key <code>server.port</code> en el archivo <code>src/main/resources/application.properties</code>
