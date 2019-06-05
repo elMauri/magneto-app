@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.magneto.app.domain.Adn;
 
+
 @Repository
 public interface AdnRepository extends JpaRepository<Adn, String[]> {}
