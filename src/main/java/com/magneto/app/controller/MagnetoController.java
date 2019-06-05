@@ -49,7 +49,7 @@ public class MagnetoController {
 		Adn adn = new Adn(adnMatrix);
 		adnService.saveAdn(adn);
 		//adnService.printAdnMatrix(adnMatrix);
-		return (adnService.isMutant(adnMatrix)) ? new ResponseEntity<>(HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);		
+		return (adnService.isMutant(adnMatrix)) ? new ResponseEntity<>(HttpStatus.OK): new ResponseEntity<>(HttpStatus.FORBIDDEN);		
 	}
 	
 	
