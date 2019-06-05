@@ -39,7 +39,7 @@ Ejemplo 2:
 ```
 A su vez la cantidad de letras **debe** ser mayor o igual a la cantidad de letras _**4**_<sup>(1)</sup> correspondientes a la cantidad mínima de letras iguales que determinan si un ADN es mutante.
 </br>
-* Si se ejecuta dos veces la misma cadena de ADN la aplicación retornará <code>**HTTP 200-OK**</code> sin embargo la misma no será tenida en cuenta para las estadísticas.
+* Si se ejecuta dos veces una cadena **valida** de ADN la aplicación retornará <code>**HTTP 200-OK**</code> sin embargo la misma no será tenida en cuenta para las estadísticas.
 
 ## Construido con
 
