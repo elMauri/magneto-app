@@ -20,15 +20,8 @@ public class AdnService implements IAdnService{
 	/* DNAMUTANTBASE: cantidad de letras que conforman la cadena
 	 * nitrogenada de un ADN Mutante 
 	 */
-	final int DNAMUTANTBASE=4;
-	
-	/* NITROGENOUSBASESIZE: Tamaño que debe tener las cadenas de 
-	 * caracteres para que de una matriz de NxN. 
-	 * El valor se levanta del application.properties
-	 * de la key "nitrogenous.base.size"
-	 */	
-	@Value( "${nitrogenous.base.size}" )
-	private Long NITROGENOUSBASESIZE;
+	@Value( "${nitrogenous.base.mutant.size}" )
+	private int DNAMUTANTBASE;
 	
 	/* ADNPATTERN: Patron correspondiente a la base nitrogenada 
 	 * y que debe cumplirse. El valor se levanta del application.properties 
@@ -117,16 +110,14 @@ public class AdnService implements IAdnService{
 	
 	/* load: Metodo que carga los ADNs a partir de un List<String> y comprueba 
 	 * que las cadenas de caracteres recibidas como ADN cumplan con 
-	*	
-	* 
-	* 
 	*/
 	public String[] load(List<String> dnaChains) {
 		int i = 0;
 		Pattern p = Pattern.compile(ADNPATTERN);
 		Matcher m;
-		if (dnaChains.size() != NITROGENOUSBASESIZE)
-			throw new AdnChainsSizeNoMatchException("La cantidad de cadenas ["+dnaChains.size()+"] NO es igual a la cantidad de Letras de una cadena :"+NITROGENOUSBASESIZE);
+		int nitrogenousBaseSize = dnaChains.get(0).length();
+		if (dnaChains.size() != nitrogenousBaseSize)
+			throw new AdnChainsSizeNoMatchException("La cantidad de cadenas ["+dnaChains.size()+"] NO es igual a la cantidad de Letras de una cadena :"+nitrogenousBaseSize);
 		String[] adnMatrix = new String[dnaChains.size()];
 		for (String chain : dnaChains) {
 			m = p.matcher(chain);
