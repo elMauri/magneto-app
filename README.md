@@ -61,6 +61,14 @@ En Linux:
 ```
 java -jar target/magneto-app-1.0.0-SNAPSHOT.jar
 ```
+Esto hará que la aplicación levante en el host: `localhost` en el puerto `8080`<sup>(2)</sup> pudiendose invocar de la siguiente manera: 
+```
+https://localhost:8080/magnetoapi/mutant/
+```
+y
+```
+https://localhost:8080/magnetoapi/stats/
+```
 
 ## Exposición
 
@@ -80,7 +88,7 @@ el cual detecta si un humano es mutante enviando la secuencia de ADN mediante un
 }
 ```
 
-Dicho servicio se encuentra expuesto en la URL:
+Dicho servicio se encuentra expuesto publicamente en la URL:
 
 ```
 https://magneto-ml-app.appspot.com/magnetoapi/mutant/
@@ -107,7 +115,7 @@ ejemplo:
   "ratio":0.4
 }
 ```
-Dicho servicio se encuentra expuesto en la URL:  
+Dicho servicio se encuentra expuesto publicamente en la URL:  
 ```
 https://magneto-ml-app.appspot.com/magnetoapi/stats/
 ```
@@ -118,6 +126,7 @@ Los codigos de respuestas manejados de este servicio son:
 &nbsp; 
 </br>
 ## Referencias
-<sup>(1)</sup> Se podra modificar la cantidad de letras que conforman la base nitrogenada modificando el valor de la key <code>nitrogenous.base.mutant.size</code> en el archivo <code>src/main/resources/application.properties</code>
+<sup>(1)</sup> Se podra modificar la cantidad de letras que conforman la base nitrogenada modificando el valor de la key <code>nitrogenous.base.mutant.size</code> en el archivo <code>src/main/resources/application.properties</code>  
+<sup>(2)</sup> Se podra modificar el puerto de escucha de los servicios modificando el valor de la key <code>server.port</code> en el archivo <code>src/main/resources/application.properties</code>
 ## Autor
 * **Mauricio Borelli** - *Trabajo Inicial y Documentación*
