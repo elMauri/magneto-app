@@ -84,9 +84,8 @@ public class AdnService implements IAdnService{
 	
 	//Metodo que recorre la matrix de ADNs hacia ABAJO buscando DNAMUTANTBASE letras iguales 
 	public int goOverDown(String[] adnMatrix, int row, int col, int cantLetras) {
-		if (adnMatrix[row].charAt(col) == adnMatrix[row + 1].charAt(col) && cantLetras < DNAMUTANTBASE && ((DNAMUTANTBASE - cantLetras) <= (adnMatrix.length - (row + 1)))) {
+		if (adnMatrix[row].charAt(col) == adnMatrix[row + 1].charAt(col) && cantLetras < DNAMUTANTBASE && ((DNAMUTANTBASE - cantLetras) <= (adnMatrix.length - (row + 1))))
 			return (goOverDown(adnMatrix, row + 1, col, ++cantLetras));
-		}
 		else return cantLetras;
 	}
 	
@@ -95,11 +94,7 @@ public class AdnService implements IAdnService{
 	public int goOverCrosswiseRight(String[] adnMatrix, int row, int col, int cantLetras) {
 		if (adnMatrix[row].charAt(col) == adnMatrix[row + 1].charAt(col + 1) && cantLetras < DNAMUTANTBASE && ((DNAMUTANTBASE - cantLetras) <= (adnMatrix[row].length() - (col + 1))))
 			return goOverCrosswiseRight(adnMatrix, row + 1, col + 1, ++cantLetras);
-		
-		else {
-			System.out.println("Cantidad de Letras encontradas diagonal:"+cantLetras);
-			return cantLetras;
-		}
+		else return cantLetras;
 	}
 	
 	//Metodo que imprime la matriz de Adns por consola
