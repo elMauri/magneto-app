@@ -63,11 +63,11 @@ public class AdnService implements IAdnService{
 			for (int col = 0; col < dna[row].length(); col++ ) {
 				cantLetras = 1;
 				if ((dna[row].length() - (col + 1)) >= DNAMUTANTBASE )
-					cantSecAdn = (goOverRight(dna, row, col, cantLetras) >= DNAMUTANTBASE )? ++cantSecAdn : cantSecAdn;
+					cantSecAdn = (goOverRight(dna, row, col, cantLetras) == DNAMUTANTBASE )? ++cantSecAdn : cantSecAdn;
 				if ((dna[row].length() - (col + 1)) >= DNAMUTANTBASE && (dna.length - (row + 1)) >= DNAMUTANTBASE)
-					cantSecAdn = (goOverCrosswiseRight(dna, row, col, cantLetras) >= DNAMUTANTBASE )? ++cantSecAdn : cantSecAdn;
+					cantSecAdn = (goOverCrosswiseRight(dna, row, col, cantLetras) == DNAMUTANTBASE )? ++cantSecAdn : cantSecAdn;
 				if ((dna.length - (row + 1)) >= DNAMUTANTBASE )
-					cantSecAdn =(goOverDown(dna, row, col, cantLetras) >= DNAMUTANTBASE )? ++cantSecAdn : cantSecAdn;
+					cantSecAdn =(goOverDown(dna, row, col, cantLetras) == DNAMUTANTBASE )? ++cantSecAdn : cantSecAdn;
 			}
 		}
 		return (cantSecAdn > 1);
@@ -95,7 +95,11 @@ public class AdnService implements IAdnService{
 	public int goOverCrosswiseRight(String[] adnMatrix, int row, int col, int cantLetras) {
 		if (adnMatrix[row].charAt(col) == adnMatrix[row + 1].charAt(col + 1) && cantLetras < DNAMUTANTBASE && ((DNAMUTANTBASE - cantLetras) <= (adnMatrix[row].length() - (col + 1))))
 			return goOverCrosswiseRight(adnMatrix, row + 1, col + 1, ++cantLetras);
-		else return cantLetras;
+		
+		else {
+			System.out.println("Cantidad de Letras encontradas diagonal:"+cantLetras);
+			return cantLetras;
+		}
 	}
 	
 	//Metodo que imprime la matriz de Adns por consola

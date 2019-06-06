@@ -9,7 +9,7 @@ Magneto quiere reclutar la mayor cantidad de mutantes para poder luchar
 contra los X-Men.
 
 ### Descripción
-Aplicación que puede detectar si un humano es mutante basándose en su secuencia de ADN la cual debe contenere al menos una secuencia de cuatro<sup>(1)</sup> letras iguales, de forma oblicua, horizontal o vertical, en base a un mensaje en formato JSON y que se expone mediante el verbo Post "_/mutant_" debiendo tener la siguiente estructura:
+Aplicación que puede detectar si un humano es mutante basándose en su secuencia de ADN la cual debe contener al menos una secuencia de cuatro<sup>(1)</sup> letras iguales, de forma oblicua, horizontal o vertical, en base a un mensaje en formato JSON y que se expone mediante el verbo Post "_/mutant_" debiendo tener la siguiente estructura:
 ```
 {
   "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTA"]
