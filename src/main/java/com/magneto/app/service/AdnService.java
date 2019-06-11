@@ -10,20 +10,33 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.magneto.app.domain.Adn;
-import com.magneto.app.exception.AdnChainNoMatchException;
-import com.magneto.app.exception.AdnChainsSizeNoMatchException;
+import com.magneto.app.exception.DNAChainInvalidException;
+import com.magneto.app.exception.DNAChainsLengthException;
+import com.magneto.app.exception.DNAException;
 import com.magneto.app.repository.AdnRepository;
+
+/**
+* AdnService class se encarga del procesamiento y carga de los ADNs desde
+* una fuente de datos, determinar si un ADN es Humano o Mutante y
+* de hacer el reporte de las estadisticas. 
+*
+* @author  Mauricio Borelli
+* @version 1.0
+* @since   2019-06-01 
+*/
 
 @Component
 public class AdnService implements IAdnService{
 	
-	/* DNAMUTANTBASE: cantidad de letras que conforman la cadena
+	/** 
+	 * DNAMUTANTBASE: cantidad de letras que conforman la cadena
 	 * nitrogenada de un ADN Mutante 
 	 */
 	@Value( "${nitrogenous.base.mutant.size}" )
 	private int DNAMUTANTBASE;
 	
-	/* ADNPATTERN: Patron correspondiente a la base nitrogenada 
+	/**
+	 * ADNPATTERN: Patron correspondiente a la base nitrogenada 
 	 * y que debe cumplirse. El valor se levanta del application.properties 
 	 * de la key "nitrogenous.base.pattern"
 	 */	
@@ -33,6 +46,31 @@ public class AdnService implements IAdnService{
 	@Autowired
 	AdnRepository adnRepository;
 	
+	/**
+	 * load: Metodo que carga los ADNs a partir de un List<String> y comprueba 
+	 * que las cadenas de caracteres recibidas como ADN cumplan con la base 
+	 * nitrogenada
+	*/
+	public String[] load(List<String> dnaChains) throws DNAChainsLengthException, DNAChainInvalidException, 
+														DNAException {
+		if (!dnaChains.isEmpty()){
+			int i = 0;
+			Pattern p = Pattern.compile(ADNPATTERN);
+			Matcher m;
+			String[] adnMatrix = new String[dnaChains.size()];
+			for (String chain : dnaChains) {
+				if (chain.length() != dnaChains.size())
+					throw new DNAChainsLengthException("La cantidad de cadenas ["+dnaChains.size()+"] NO es igual a la cantidad de Letras de una cadena :"+chain.length());
+				m = p.matcher(chain);
+				if (!m.find()){
+					throw new DNAChainInvalidException("La cadena ["+chain+"] NO cumple con las letras de la base Nitrogenada :"+ADNPATTERN.substring(ADNPATTERN.indexOf("["), ADNPATTERN.indexOf("]")));
+				}
+				adnMatrix[i++] = chain;
+			}
+			return adnMatrix;
+		}else
+			throw new DNAException("NO se ingresaron cadenas de ADN");
+	}
 	
 	@Override
 	public List<Adn> getAllAdns() {
@@ -51,11 +89,12 @@ public class AdnService implements IAdnService{
 		adnRepository.save(adn);	
 	}
 
-	@Override
-	/* isMutant: Metodo que retorna "true" si un Adn es Mutante, "false" caso contrario
+	
+	/** isMutant: Metodo que retorna "true" si un Adn es Mutante, "false" caso contrario
 	 * 
 	 * @param dna es la matriz de ADNs
 	 */
+	@Override
 	public Boolean isMutant(String[] dna) {
 		int cantLetras;
 		int cantSecAdn = 0;
@@ -107,24 +146,6 @@ public class AdnService implements IAdnService{
 		}
 	}
 	
-	/* load: Metodo que carga los ADNs a partir de un List<String> y comprueba 
-	 * que las cadenas de caracteres recibidas como ADN cumplan con 
-	*/
-	public String[] load(List<String> dnaChains) {
-		int i = 0;
-		Pattern p = Pattern.compile(ADNPATTERN);
-		Matcher m;
-		String[] adnMatrix = new String[dnaChains.size()];
-		for (String chain : dnaChains) {
-			if (chain.length() != dnaChains.size())
-				throw new AdnChainsSizeNoMatchException("La cantidad de cadenas ["+dnaChains.size()+"] NO es igual a la cantidad de Letras de una cadena :"+chain.length());
-			m = p.matcher(chain);
-			if (!m.find()){
-				throw new AdnChainNoMatchException("La cadena ["+chain+"] NO cumple con las letras de la base Nitrogenada :"+ADNPATTERN.substring(ADNPATTERN.indexOf("["), ADNPATTERN.indexOf("]")));
-			}
-			adnMatrix[i++] = chain;
-		}
-		return adnMatrix;
-	}
+
 	
 }
